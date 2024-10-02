@@ -9,16 +9,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { EmptyState, InfoBox, VideoCard } from "../../components";
 
 const Profile = () => {
-  const { user, setUser, setIsLogged } = useGlobalContext();
   const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
-
-  const logout = async () => {
-    await signOut();
-    setUser(null);
-    setIsLogged(false);
-
-    router.replace("/sign-in");
-  };
 
   return (
     <SafeAreaView className="bg-primary h-full">

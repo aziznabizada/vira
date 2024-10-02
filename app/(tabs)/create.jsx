@@ -15,10 +15,8 @@ import {
 import { icons } from "../../constants";
 import { createVideoPost } from "../../lib/appwrite";
 import { CustomButton, FormField } from "../../components";
-import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Create = () => {
-  const { user } = useGlobalContext();
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
     title: "",
@@ -70,7 +68,7 @@ const Create = () => {
     try {
       await createVideoPost({
         ...form,
-        userId: user.$id,
+        userId: 323,
       });
 
       Alert.alert("Success", "Post uploaded successfully");

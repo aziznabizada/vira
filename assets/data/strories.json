@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Story 1",
+    "description": "This is the description for Story 1.",
+    "content": "Once upon a time...",
+    "image": "https://example.com/story1-image.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Story 2",
+    "description": "This is the description for Story 2.",
+    "content": "In a land far away...",
+    "image": "https://example.com/story2-image.jpg"
+  }
+]
