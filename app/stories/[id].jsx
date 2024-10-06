@@ -34,7 +34,7 @@ const StoryDetail = () => {
       try {
         const storedFavorites = await AsyncStorage.getItem("favorites");
         if (storedFavorites) {
-          setFavorites(JSON.parse(storedFavorites));
+          toggleFavorite(JSON.parse(storedFavorites));
         }
       } catch (error) {
         console.error("Failed to load favorites:", error);
@@ -104,7 +104,7 @@ const StoryDetail = () => {
       </View>
       <View className="px-4">
         <Text style={{ marginVertical: 10 }}>{story.description}</Text>
-        <Text>{story.content}</Text>
+        <Text style={{ marginVertical: 10 }}>{story.content}</Text>
       </View>
     </ScrollView>
   );
