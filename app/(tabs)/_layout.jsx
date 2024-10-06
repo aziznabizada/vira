@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { Redirect, Tabs } from "expo-router";
+import { Stack, Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
 
 import { icons } from "../../constants";
-// import { Loader } from "../../components";
+import Favorites from "./favorite";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
@@ -15,7 +15,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
         className="w-6 h-6"
       />
       <Text
-        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
+        className={`${focused ? "font-vsemibold" : "font-vregular"} text-xs`}
         style={{ color: color }}
       >
         {name}
@@ -30,12 +30,12 @@ const TabLayout = () => {
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#FFA001",
-          tabBarInactiveTintColor: "#CDCDE0",
+          tabBarInactiveTintColor: "#333333",
           tabBarShowLabel: false,
           tabBarStyle: {
-            backgroundColor: "#161622",
+            backgroundColor: "#ffffff",
             borderTopWidth: 1,
-            borderTopColor: "#232533",
+            borderTopColor: "#dddddd",
             height: 84,
           },
         }}
@@ -47,55 +47,43 @@ const TabLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.home}
+                icon={icons?.home}
                 color={color}
-                name="Home"
+                className="font-vextrabold"
+                name="خانه"
+                focused={focused}
+              />
+            ),
+          }}
+          components={Favorites}
+        />
+        <Tabs.Screen
+          name="favorite"
+          options={{
+            title: "Favorite",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon
+                icon={icons?.favorite}
+                color={color}
+                className="font-vextrabold"
+                name="مورد علاقه"
                 focused={focused}
               />
             ),
           }}
         />
         <Tabs.Screen
-          name="bookmark"
+          name="index"
           options={{
-            title: "Bookmark",
+            title: "Story",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.bookmark}
+                icon={icons?.story}
                 color={color}
-                name="Bookmark"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-
-        <Tabs.Screen
-          name="create"
-          options={{
-            title: "Create",
-            headerShown: false,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.plus}
-                color={color}
-                name="Create"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: "Profile",
-            headerShown: false,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.profile}
-                color={color}
-                name="Profile"
+                name="داستان"
+                className="font-vextrabold"
                 focused={focused}
               />
             ),
@@ -104,7 +92,7 @@ const TabLayout = () => {
       </Tabs>
 
       {/* <Loader isLoading={loading} /> */}
-      <StatusBar backgroundColor="#161622" style="light" />
+      {/* <StatusBar backgroundColor="#161622" style="light" /> */}
     </>
   );
 };

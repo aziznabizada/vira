@@ -32,10 +32,10 @@ const Search = () => {
         ListHeaderComponent={() => (
           <>
             <View className="flex my-6 px-4">
-              <Text className="font-pmedium text-gray-100 text-sm">
+              <Text className="font-vmedium text-gray-100 text-sm">
                 Search Results
               </Text>
-              <Text className="text-2xl font-psemibold text-white mt-1">
+              <Text className="text-2xl font-vsemibold text-white mt-1">
                 {query}
               </Text>
 
