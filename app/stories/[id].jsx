@@ -1,6 +1,6 @@
 // app/[id].jsx
 
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import {
   View,
   Text,
@@ -26,6 +26,9 @@ const StoryDetail = () => {
   const { id } = useLocalSearchParams(); // Get the ID from the URL
   const navigation = useNavigation(); // Get the navigation object
   const { favorites, toggleFavorite } = useFavorites(); // Use favorites context
+
+  const [isPlaying, setIsPlaying] = useState();
+
   const story = storiesData.find((story) => story.id === id); // Find the story by ID
   const imageSource = images[story.image]; // Access the image using the mapping
 
@@ -62,9 +65,21 @@ const StoryDetail = () => {
             />
           </TouchableOpacity>
         ),
+        headerRight: () => (
+          <TouchableOpacity
+            style={styles.favoriteButton}
+            onPress={toggleFavorite}
+          >
+            <Ionicons
+              name={favorites.includes(story.id) ? "heart" : "heart-outline"}
+              size={24}
+              color="white"
+            />
+          </TouchableOpacity>
+        ),
       });
     }
-  }, [navigation, story]);
+  }, [navigation, story, favorites]);
 
   if (!story) {
     return (
@@ -79,12 +94,38 @@ const StoryDetail = () => {
       <View style={styles.imageContainer}>
         <Image
           source={imageSource} // Use require if images are local
-          style={{ width: "100%", height: 350 }}
-          color={favorites.includes(story.id) ? "red" : "gray"}
+          style={{ width: "100%", height: 320 }}
         />
+        <View style={styles.audioContainer} className="bg-secondary-100">
+          {/* Previous Button */}
+          <TouchableOpacity
+          // onPress={handlePrevious}
+          >
+            <Ionicons name="play-skip-back" size={32} color="#FFFFFF" />
+          </TouchableOpacity>
+
+          {/* Play/Pause Button */}
+          <TouchableOpacity
+            // onPress={handlePlayPause}
+            style={{ marginHorizontal: 16 }}
+          >
+            <Ionicons
+              name={isPlaying ? "pause" : "play"}
+              size={32}
+              color="#FFFFFF"
+            />
+          </TouchableOpacity>
+
+          {/* Next Button */}
+          <TouchableOpacity
+          // onPress={handleNext}
+          >
+            <Ionicons name="play-skip-forward" size={32} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.titleContainer}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.favoriteButton}
           onPress={() => toggleFavorite(story.id)}
         >
@@ -93,7 +134,7 @@ const StoryDetail = () => {
             size={28}
             color="#FF8E01"
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View>
           {/* Author */}
           <Text style={styles.title}>{story.title}</Text>
@@ -112,11 +153,20 @@ const StoryDetail = () => {
 
 const styles = StyleSheet.create({
   imageContainer: {
-    position: "relative", // Set position to relative for the parent container
+    position: "relative",
   },
-  image: {
-    width: "100%",
-    height: 400,
+  audioContainer: {
+    position: "absolute", // Position it absolutely within the parent container
+    bottom: -20, // Position it 10 units from the bottom
+    left: 50, // Center it horizontally
+    transform: [{ translateX: -50 }], // Offset to truly center (adjust based on container width)
+    flexDirection: "row", // Row layout for left, play/pause, and right buttons
+    alignItems: "center", // Center items vertically
+
+    borderRadius: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    gap: 25,
   },
   titleContainer: {
     flexDirection: "row", // Align items in a row

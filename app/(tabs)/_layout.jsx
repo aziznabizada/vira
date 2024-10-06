@@ -41,21 +41,20 @@ const TabLayout = () => {
         }}
       >
         <Tabs.Screen
-          name="home"
+          name="index"
           options={{
-            title: "Home",
+            title: "Story",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons?.home}
+                icon={icons?.story}
                 color={color}
+                name="داستان"
                 className="font-vextrabold"
-                name="خانه"
                 focused={focused}
               />
             ),
           }}
-          components={Favorites}
         />
         <Tabs.Screen
           name="favorite"
@@ -73,21 +72,23 @@ const TabLayout = () => {
             ),
           }}
         />
+
         <Tabs.Screen
-          name="index"
+          name="home"
           options={{
-            title: "Story",
+            title: "Home",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons?.story}
+                icon={icons?.home}
                 color={color}
-                name="داستان"
                 className="font-vextrabold"
+                name="خانه"
                 focused={focused}
               />
             ),
           }}
+          components={Favorites}
         />
       </Tabs>
 

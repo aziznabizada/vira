@@ -33,11 +33,11 @@ const StoryCard = ({ story }) => {
       {/* Story Content */}
       <View className="p-4">
         {/* Title */}
-        <Text className="text-xl font-vsemibold text-gray-800 text-right">
+        <Text className="text-xl font-vsemibold text-gray-800">
           {story.title}
         </Text>
         {/* Author */}
-        <Text className="text-sm text-gray-500 mt-1 text-right">
+        <Text className="text-sm text-gray-500 mt-1">
           نویسنده: {story.author}
         </Text>
         {/* Short Description */}
