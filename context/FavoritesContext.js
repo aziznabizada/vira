@@ -41,7 +41,6 @@ export const FavoritesProvider = ({ children }) => {
     }
   };
 
-  console.log(favorites);
   return (
     <FavoritesContext.Provider value={{ favorites, toggleFavorite }}>
       {children}

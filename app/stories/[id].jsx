@@ -12,7 +12,6 @@ import {
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import storiesData from "../../assets/data/strories.json"; // Adjust the path to your JSON file
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   addFavorite,
   removeFavorite,

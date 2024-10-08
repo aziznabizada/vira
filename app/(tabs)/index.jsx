@@ -3,8 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native";
 
 import stories from "../../assets/data/strories.json";
-
-import StoryCard from "../../components/StoryCard";
+import { StoryCard } from "../../components";
 
 const StoryList = () => {
   return (
