@@ -13,7 +13,11 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 import storiesData from "../../assets/data/strories.json"; // Adjust the path to your JSON file
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useFavorites } from "../../context/FavoritesContext";
+import {
+  addFavorite,
+  removeFavorite,
+  isFavorite,
+} from "./../../utils/favoritesStorage";
 
 const adventureImage = require("../../assets/story-images/roba-khargoosh.png");
 
@@ -25,7 +29,7 @@ const images = {
 const StoryDetail = () => {
   const { id } = useLocalSearchParams(); // Get the ID from the URL
   const navigation = useNavigation(); // Get the navigation object
-  const { favorites, toggleFavorite } = useFavorites(); // Use favorites context
+  const [favorite, setFavorite] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState();
 
@@ -33,18 +37,21 @@ const StoryDetail = () => {
   const imageSource = images[story.image]; // Access the image using the mapping
 
   useEffect(() => {
-    const loadFavorites = async () => {
-      try {
-        const storedFavorites = await AsyncStorage.getItem("favorites");
-        if (storedFavorites) {
-          toggleFavorite(JSON.parse(storedFavorites));
-        }
-      } catch (error) {
-        console.error("Failed to load favorites:", error);
-      }
+    const checkFavoriteStatus = async () => {
+      const result = await isFavorite(story.id);
+      setFavorite(result);
     };
-    loadFavorites();
-  }, []);
+    checkFavoriteStatus();
+  }, [story.id]);
+
+  const toggleFavorite = async () => {
+    if (favorite) {
+      await removeFavorite(story.id);
+    } else {
+      await addFavorite(story);
+    }
+    setFavorite(!favorite);
+  };
 
   // Set the header title and styles when the component mounts
   useLayoutEffect(() => {
@@ -69,17 +76,18 @@ const StoryDetail = () => {
           <TouchableOpacity
             style={styles.favoriteButton}
             onPress={toggleFavorite}
+            className="bg-white"
           >
             <Ionicons
-              name={favorites.includes(story.id) ? "heart" : "heart-outline"}
+              name={favorite ? "heart" : "heart-outline"}
               size={24}
-              color="white"
+              color="#FF9C01"
             />
           </TouchableOpacity>
         ),
       });
     }
-  }, [navigation, story, favorites]);
+  }, [navigation, story, favorite]);
 
   if (!story) {
     return (
@@ -94,14 +102,14 @@ const StoryDetail = () => {
       <View style={styles.imageContainer}>
         <Image
           source={imageSource} // Use require if images are local
-          style={{ width: "100%", height: 320 }}
+          style={{ width: "100%", height: 300 }}
         />
         <View style={styles.audioContainer} className="bg-secondary-100">
           {/* Previous Button */}
           <TouchableOpacity
           // onPress={handlePrevious}
           >
-            <Ionicons name="play-skip-back" size={32} color="#FFFFFF" />
+            <Ionicons name="play-forward" size={28} color="#FFFFFF" />
           </TouchableOpacity>
 
           {/* Play/Pause Button */}
@@ -111,7 +119,7 @@ const StoryDetail = () => {
           >
             <Ionicons
               name={isPlaying ? "pause" : "play"}
-              size={32}
+              size={28}
               color="#FFFFFF"
             />
           </TouchableOpacity>
@@ -120,7 +128,7 @@ const StoryDetail = () => {
           <TouchableOpacity
           // onPress={handleNext}
           >
-            <Ionicons name="play-skip-forward" size={32} color="#FFFFFF" />
+            <Ionicons name="play-back" size={28} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
       </View>
@@ -157,30 +165,36 @@ const styles = StyleSheet.create({
   },
   audioContainer: {
     position: "absolute", // Position it absolutely within the parent container
-    bottom: -20, // Position it 10 units from the bottom
-    left: 50, // Center it horizontally
-    transform: [{ translateX: -50 }], // Offset to truly center (adjust based on container width)
+    bottom: -28, // Position it 10 units from the bottom
+    left: 65, // Center it horizontally
+    right: 65,
+    // transform: [{ translateX: -30 }], // Offset to truly center (adjust based on container width)
     flexDirection: "row", // Row layout for left, play/pause, and right buttons
     alignItems: "center", // Center items vertically
-
-    borderRadius: 25,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    gap: 25,
+    justifyContent: "space-around",
+    borderRadius: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    gap: 30,
   },
   titleContainer: {
     flexDirection: "row", // Align items in a row
     justifyContent: "space-between", // Space out the title and icon
     alignItems: "center", // Center items vertically
     padding: 16, // Padding around the title container
+    marginTop: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
   },
   favoriteButton: {
-    borderRadius: 25,
-    padding: 2, // Optional: padding for better touch area
+    width: 35,
+    height: 35,
+    borderRadius: 25, // Round shape
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 2,
   },
   backButton: {
     width: 35,
@@ -188,6 +202,9 @@ const styles = StyleSheet.create({
     borderRadius: 25, // Round shape
     justifyContent: "center",
     alignItems: "center",
+  },
+  storyContent: {
+    marginTop: "20px",
   },
 });
 
