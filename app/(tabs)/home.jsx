@@ -1,56 +1,84 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { Audio } from "expo-av";
+import React from "react";
+import { View, Text, StyleSheet, Linking, ScrollView } from "react-native";
 
-const AudioPlayer = () => {
-  const [sound, setSound] = useState();
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/audio/1.mp3") // Change the path to your audio file
-    );
-    setSound(sound);
-    await sound.playAsync();
-    setIsPlaying(true);
-  }
-
-  async function stopSound() {
-    await sound.stopAsync();
-    setIsPlaying(false);
-  }
-
-  // Cleanup function to unload sound
-  useEffect(() => {
-    return sound
-      ? () => {
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
-
+export default function AboutScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Audio Player</Text>
-      <Button
-        title={isPlaying ? "Stop" : "Play"}
-        onPress={isPlaying ? stopSound : playSound}
-      />
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>About Us</Text>
+
+      <Text style={styles.sectionTitle}>Who We Are</Text>
+      <Text style={styles.paragraph}>
+        Welcome to <Text style={styles.appName}>[Your App Name]</Text>! We are a
+        team of passionate developers, designers, and creators who believe in
+        the power of storytelling. Our mission is to bring inspiring stories and
+        content right to your fingertips.
+      </Text>
+
+      <Text style={styles.sectionTitle}>Our Mission</Text>
+      <Text style={styles.paragraph}>
+        At <Text style={styles.appName}>[Your App Name]</Text>, we strive to
+        empower, inspire, and connect people with stories that matter.
+      </Text>
+
+      <Text style={styles.sectionTitle}>Why Choose Us?</Text>
+      <Text style={styles.paragraph}>
+        - <Text style={styles.bold}>User-Centric Design</Text>: We focus on
+        creating an intuitive and enjoyable experience.{"\n"}-{" "}
+        <Text style={styles.bold}>Quality Content</Text>: Our team curates
+        high-quality stories to keep you informed and inspired.{"\n"}-{" "}
+        <Text style={styles.bold}>Continuous Improvement</Text>: We’re always
+        working to enhance your experience.
+      </Text>
+
+      <Text style={styles.sectionTitle}>Get in Touch</Text>
+      <Text style={styles.paragraph}>
+        We love hearing from our users! Feel free to reach out at:{"\n"}
+        <Text
+          style={styles.link}
+          onPress={() => Linking.openURL("mailto:support@yourappname.com")}
+        >
+          support@yourappname.com
+        </Text>
+      </Text>
+    </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
+    flexGrow: 1,
+    padding: 20,
+    backgroundColor: "#fff",
   },
   title: {
-    fontSize: 24,
-    marginBottom: 20,
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
+    color: "#333",
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    marginTop: 20,
+    color: "#333",
+  },
+  paragraph: {
+    fontSize: 16,
+    lineHeight: 24,
+    color: "#666",
+    marginTop: 10,
+  },
+  appName: {
+    fontWeight: "bold",
+    color: "#000",
+  },
+  bold: {
+    fontWeight: "bold",
+  },
+  link: {
+    color: "#007AFF",
+    textDecorationLine: "underline",
+    marginTop: 5,
   },
 });
-
-export default AudioPlayer;

@@ -3,7 +3,6 @@ import { useFonts } from "expo-font";
 import "react-native-url-polyfill/auto";
 import { SplashScreen, Stack } from "expo-router";
 import { I18nManager } from "react-native";
-import { StatusBar } from 'expo-status-bar';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -43,8 +42,6 @@ const RootLayout = () => {
 
   return (
     <>
-      <StatusBar style="dark" backgroundColor="#fff" />
-
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
