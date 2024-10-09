@@ -83,7 +83,7 @@ const TabLayout = () => {
                 icon={icons?.home}
                 color={color}
                 className="font-vextrabold"
-                name="خانه"
+                name="در باره ما"
                 focused={focused}
               />
             ),

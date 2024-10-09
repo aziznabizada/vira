@@ -3,7 +3,7 @@ import { useFonts } from "expo-font";
 import "react-native-url-polyfill/auto";
 import { SplashScreen, Stack } from "expo-router";
 import { I18nManager } from "react-native";
-import { FavoritesProvider } from "../context/FavoritesContext";
+import { StatusBar } from 'expo-status-bar';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -42,7 +42,9 @@ const RootLayout = () => {
   }
 
   return (
-    <FavoritesProvider>
+    <>
+      <StatusBar style="dark" backgroundColor="#fff" />
+
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
@@ -55,7 +57,7 @@ const RootLayout = () => {
         />
         {/* Additional screens can go here */}
       </Stack>
-    </FavoritesProvider>
+    </>
   );
 };
 
