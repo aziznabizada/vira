@@ -7,7 +7,7 @@ import {
   removeFavorite,
   isFavorite,
 } from "./../utils/favoritesStorage";
-import { Ionicons } from "@expo/vector-icons";
+// import { Ionicons } from "@expo/vector-icons";
 
 // Create a mapping for images
 
@@ -63,7 +63,7 @@ const StoryCard = ({ story }) => {
             نویسنده: {story.author}
           </Text>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.favoriteButton}
           onPress={toggleFavorite}
           className="bg-white"
@@ -73,7 +73,7 @@ const StoryCard = ({ story }) => {
             size={28}
             color="#FF9C01"
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </TouchableOpacity>
   );

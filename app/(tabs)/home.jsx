@@ -10,22 +10,24 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome icons
 
+import { images } from "../../constants";
+
 export default function AboutScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
         {/* Header Image */}
         <Image
-          source={{ uri: "https://example.com/header-image.jpg" }} // Replace with your header image URL
+          source={images.aboutUsHeader} // Replace with your header image URL
           style={styles.headerImage}
           resizeMode="cover"
         />
 
         <Text style={styles.title}>درباره ما</Text>
         <Text style={styles.description}>
-          به مکتب ویرا خوش آمدید! در مکتب ویرا، ما به ارائه آموزش با کیفیت و
-          ایجاد یک محیط حمایتی برای دانش‌آموزان متعهد هستیم. هدف ما پرورش
-          خلاقیت، تفکر انتقادی و عشق به یادگیری در دانش‌آموزان است.
+          در مکتب ویرا، ما به ارائه آموزش با کیفیت و ایجاد یک محیط حمایتی برای
+          دانش‌آموزان متعهد هستیم. هدف ما پرورش خلاقیت، تفکر انتقادی و عشق به
+          یادگیری در دانش‌آموزان است.
         </Text>
 
         <Text style={styles.subtitle}>مراکز پخش</Text>

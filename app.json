@@ -28,13 +28,13 @@
       "package": "com.aziznabizada.vira"
     },
     "androidStatusBar": {
-      "backgroundColor": "#FFFFFF",
-      "barStyle": "dark-content"
+      "backgroundColor": "#000000", // Set background color to black
+      "barStyle": "light-content" // Set text/icons to light to contrast with the black background
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "expo-font", "expo-localization"],
+    "plugins": ["expo-router", "expo-font"],
     "extra": {
       "supportsRTL": true,
       "forcesRTL": true,
