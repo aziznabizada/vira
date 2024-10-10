@@ -1,6 +1,6 @@
 // app/[id].jsx
 
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -18,6 +18,9 @@ import {
   isFavorite,
 } from "./../../utils/favoritesStorage";
 
+import { Audio } from "expo-av";
+import { Asset } from "expo-asset";
+
 // Create a mapping for images
 const images = {
   "image1.png": require("../../assets/story-images/image1.png"),
@@ -32,16 +35,53 @@ const images = {
   "image10.png": require("../../assets/story-images/image10.png"),
   "image11.png": require("../../assets/story-images/image11.png"),
 };
+const audios = {
+  "audio1.mp3": require("../../assets/audio/audio1.mp3"),
+  "audio2.mp3": require("../../assets/audio/audio2.mp3"),
+  "audio3.mp3": require("../../assets/audio/audio3.mp3"),
+  "audio4.mp3": require("../../assets/audio/audio4.mp3"),
+  "audio5.mp3": require("../../assets/audio/audio5.mp3"),
+  "audio6.mp3": require("../../assets/audio/audio6.mp3"),
+  "audio7.mp3": require("../../assets/audio/audio7.mp3"),
+  "audio8.mp3": require("../../assets/audio/audio8.mp3"),
+  "audio9.mp3": require("../../assets/audio/audio9.mp3"),
+  "audio10.mp3": require("../../assets/audio/audio10.mp3"),
+  "audio11.mp3": require("../../assets/audio/audio11.mp3"),
+};
 
 const StoryDetail = () => {
   const { id } = useLocalSearchParams(); // Get the ID from the URL
   const navigation = useNavigation(); // Get the navigation object
   const [favorite, setFavorite] = useState(false);
 
-  const [isPlaying, setIsPlaying] = useState();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const soundRef = useRef(new Audio.Sound());
 
   const story = storiesData.find((story) => story.id === id); // Find the story by ID
   const imageSource = images[story.image]; // Access the image using the mapping
+
+  const loadAudio = async () => {
+    const audioAsset = Asset.fromModule(audios[story.audio]);
+    console.log(audioAsset);
+    // await soundRef.current.loadAsync(audioAsset);
+  };
+
+  const playAudio = async () => {
+    await soundRef.current.playAsync();
+    setIsPlaying(true);
+  };
+
+  const pauseAudio = async () => {
+    await soundRef.current.pauseAsync();
+    setIsPlaying(false);
+  };
+  useEffect(() => {
+    loadAudio();
+
+    return () => {
+      soundRef.current.unloadAsync(); // Unload audio on unmount
+    };
+  }, []);
 
   useEffect(() => {
     const checkFavoriteStatus = async () => {
@@ -114,14 +154,13 @@ const StoryDetail = () => {
         <View style={styles.audioContainer} className="bg-secondary-100">
           {/* Previous Button */}
           <TouchableOpacity
-          // onPress={handlePrevious}
+          // onPress={playPrevious}
           >
             <Ionicons name="play-forward" size={28} color="#FFFFFF" />
           </TouchableOpacity>
 
-          {/* Play/Pause Button */}
           <TouchableOpacity
-            // onPress={handlePlayPause}
+            onPress={isPlaying ? pauseAudio : playAudio}
             style={{ marginHorizontal: 16 }}
           >
             <Ionicons
@@ -133,7 +172,7 @@ const StoryDetail = () => {
 
           {/* Next Button */}
           <TouchableOpacity
-          // onPress={handleNext}
+          // onPress={playNext}
           >
             <Ionicons name="play-back" size={28} color="#FFFFFF" />
           </TouchableOpacity>
