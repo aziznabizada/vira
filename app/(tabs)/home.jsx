@@ -1,84 +1,145 @@
 import React from "react";
-import { View, Text, StyleSheet, Linking, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Linking,
+  ScrollView,
+  Image,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome icons
 
 export default function AboutScreen() {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>About Us</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.container}>
+        {/* Header Image */}
+        <Image
+          source={{ uri: "https://example.com/header-image.jpg" }} // Replace with your header image URL
+          style={styles.headerImage}
+          resizeMode="cover"
+        />
 
-      <Text style={styles.sectionTitle}>Who We Are</Text>
-      <Text style={styles.paragraph}>
-        Welcome to <Text style={styles.appName}>[Your App Name]</Text>! We are a
-        team of passionate developers, designers, and creators who believe in
-        the power of storytelling. Our mission is to bring inspiring stories and
-        content right to your fingertips.
-      </Text>
-
-      <Text style={styles.sectionTitle}>Our Mission</Text>
-      <Text style={styles.paragraph}>
-        At <Text style={styles.appName}>[Your App Name]</Text>, we strive to
-        empower, inspire, and connect people with stories that matter.
-      </Text>
-
-      <Text style={styles.sectionTitle}>Why Choose Us?</Text>
-      <Text style={styles.paragraph}>
-        - <Text style={styles.bold}>User-Centric Design</Text>: We focus on
-        creating an intuitive and enjoyable experience.{"\n"}-{" "}
-        <Text style={styles.bold}>Quality Content</Text>: Our team curates
-        high-quality stories to keep you informed and inspired.{"\n"}-{" "}
-        <Text style={styles.bold}>Continuous Improvement</Text>: We’re always
-        working to enhance your experience.
-      </Text>
-
-      <Text style={styles.sectionTitle}>Get in Touch</Text>
-      <Text style={styles.paragraph}>
-        We love hearing from our users! Feel free to reach out at:{"\n"}
-        <Text
-          style={styles.link}
-          onPress={() => Linking.openURL("mailto:support@yourappname.com")}
-        >
-          support@yourappname.com
+        <Text style={styles.title}>درباره ما</Text>
+        <Text style={styles.description}>
+          به مکتب ویرا خوش آمدید! در مکتب ویرا، ما به ارائه آموزش با کیفیت و
+          ایجاد یک محیط حمایتی برای دانش‌آموزان متعهد هستیم. هدف ما پرورش
+          خلاقیت، تفکر انتقادی و عشق به یادگیری در دانش‌آموزان است.
         </Text>
-      </Text>
-    </ScrollView>
+
+        <Text style={styles.subtitle}>مراکز پخش</Text>
+        <Text style={styles.location}>
+          کابل، جاده شهید مزاری، بعد از ایستگاه تانک تیل، کتابفروشی اقرأ
+        </Text>
+        <Text style={styles.location}>
+          کابل، خیرخانه، چهارراهی قلعه نجارها، پلازای احمدیار، طبقه دوم، کتاب
+          زریاب
+        </Text>
+
+        <Text style={styles.subtitle}>آدرس مکتب ویرا</Text>
+        <Text style={styles.location}>
+          کابل، جاده شهید مزاری، سرک معرفت، گلستان هشتم، مکتب ویرا
+        </Text>
+
+        {/* Icons for Website and Phone Number */}
+        <View style={styles.contactIcons}>
+          <View style={styles.iconContainer}>
+            <FontAwesome
+              name="phone"
+              size={24}
+              color="#FF9001"
+              onPress={() => Linking.openURL("tel:0799448050")}
+            />
+            <Text
+              style={styles.iconText}
+              onPress={() => Linking.openURL("tel:0799448050")}
+            >
+              0799448050
+            </Text>
+          </View>
+          <View style={styles.iconContainer}>
+            <FontAwesome
+              name="globe"
+              size={24}
+              color="#FF9001"
+              onPress={() => Linking.openURL("http://www.vira.af")}
+            />
+            <Text
+              style={styles.iconText}
+              onPress={() => Linking.openURL("http://www.vira.af")}
+            >
+              www.vira.af
+            </Text>
+          </View>
+        </View>
+
+        <Text style={styles.footer}>
+          حق هر گونه انتشار برای مکتب ویرا محفوظ است.
+        </Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#f9f9f9",
+  },
   container: {
-    flexGrow: 1,
-    padding: 20,
-    backgroundColor: "#fff",
+    padding: 16,
+  },
+  headerImage: {
+    width: "100%",
+    height: 200, // Adjust height as needed
+    borderRadius: 10,
+    marginBottom: 16,
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 10,
-    textAlign: "center",
-    color: "#333",
+    marginBottom: 12,
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: "600",
-    marginTop: 20,
-    color: "#333",
-  },
-  paragraph: {
+  description: {
     fontSize: 16,
+    marginBottom: 12,
     lineHeight: 24,
+  },
+  subtitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 16,
+    marginBottom: 8,
+  },
+  location: {
+    fontSize: 16,
+    marginBottom: 8,
+    lineHeight: 24,
+  },
+  contact: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  contactIcons: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    marginVertical: 10,
+    alignItems: "center",
+  },
+  iconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  iconText: {
+    marginLeft: 8,
+    fontSize: 16,
+    color: "#FF9001",
+  },
+  footer: {
+    fontSize: 14,
+    marginTop: 16,
     color: "#666",
-    marginTop: 10,
-  },
-  appName: {
-    fontWeight: "bold",
-    color: "#000",
-  },
-  bold: {
-    fontWeight: "bold",
-  },
-  link: {
-    color: "#007AFF",
-    textDecorationLine: "underline",
-    marginTop: 5,
+    textAlign: "center",
   },
 });

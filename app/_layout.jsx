@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { useFonts } from "expo-font";
-import "react-native-url-polyfill/auto";
 import { SplashScreen, Stack } from "expo-router";
 import { I18nManager } from "react-native";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -21,25 +19,25 @@ const RootLayout = () => {
   });
 
   useEffect(() => {
-    if (error) {
-      console.error("Font loading error:", error);
-      return;
-    }
+    const setupRTL = () => {
+      if (!I18nManager.isRTL) {
+        I18nManager.forceRTL(true);
+        I18nManager.allowRTL(true);
 
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, error]);
+        // Hide splash screen after RTL is applied
+      }
 
-  useEffect(() => {
-    I18nManager.forceRTL(true); // Enable RTL layout globally
-    I18nManager.allowRTL(true); // Allow switching between LTR and RTL
-  }, []);
+      // Hide the splash screen after fonts are loaded
+      if (fontsLoaded) {
+        SplashScreen.hideAsync();
+      }
+    };
+    setupRTL();
+  }, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    return null; // Ensure no rendering until fonts are loaded
+    return null; // Wait until fonts are loaded
   }
-
   return (
     <>
       <Stack>
@@ -52,7 +50,6 @@ const RootLayout = () => {
             headerTransparent: true,
           }}
         />
-        {/* Additional screens can go here */}
       </Stack>
     </>
   );
