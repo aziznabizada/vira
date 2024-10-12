@@ -18,6 +18,15 @@ export const AudioProvider = ({ children }) => {
     const { sound } = await Audio.Sound.createAsync(soundFile);
     setGlobalSound(sound);
     setIsPlaying(true);
+
+    // Set up a playback status listener to monitor when the sound finishes
+    sound.setOnPlaybackStatusUpdate((status) => {
+      if (status.didJustFinish && !status.isLooping) {
+        setIsPlaying(false);
+        setGlobalSound(null); // Optionally clear the sound instance
+      }
+    });
+
     await sound.playAsync();
   };
 
