@@ -20,8 +20,6 @@ import {
 import { Audio } from "expo-av";
 import { useAudio } from "../../context/AudioContext";
 
-import { Audio } from "expo-av";
-
 // Create a mapping for images
 const images = {
   "image1.png": require("../../assets/story-images/image1.png"),
@@ -153,7 +151,8 @@ const StoryDetail = () => {
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => {
-              navigation.goBack();
+              router.push("/");
+              // navigation.goBack();
             }}
             className="bg-white"
           >
