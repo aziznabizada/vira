@@ -115,7 +115,7 @@
 شد و به جنگلی رفت و تا آخر عمر خود تنها زندگی کرد. 
 `,
     "image": "image6.png",
-    "audio": "audio1.mp3"
+    "audio": "audio6.mp3"
   },
   {
     "id": "7",
@@ -137,7 +137,7 @@
 پرسش کار میکند. من حاال خیلی خوشحال هستم
 `,
     "image": "image7.png",
-    "audio": "audio1.mp3"
+    "audio": "audio7.mp3"
   },
   {
     "id": "8",
@@ -156,7 +156,7 @@
 او حاال شکارچی ماهری شده بود و میتوانست هم شکم خود را سیر کند و هم شکم بقیه دوستانی را که ضعیف و بیامر بودند.
     `,
     "image": "image8.png",
-    "audio": "audio1.mp3"
+    "audio": "audio8.mp3"
   },
   {
     "id": "9",
@@ -180,7 +180,7 @@
 رفیق باشند.
 `,
     "image": "image9.png",
-    "audio": "audio1.mp3"
+    "audio": "audio9.mp3"
   },
   {
     "id": "10",
@@ -197,7 +197,7 @@
 بود.
 `,
     "image": "image10.png",
-    "audio": "audio1.mp3"
+    "audio": "audio10.mp3"
   },
   {
     "id": "11",
@@ -215,6 +215,6 @@
     خیلی ناراحت بود. اما پشیامنی فایدهای نداشت.
     `,
     "image": "image11.png",
-    "audio": "audio1.mp3"
+    "audio": "audio11.mp3"
   }
 ]
