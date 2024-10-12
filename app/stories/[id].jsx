@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import storiesData from "../../assets/data/strories.json"; // Adjust the path to your JSON file
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -17,6 +17,8 @@ import {
   removeFavorite,
   isFavorite,
 } from "./../../utils/favoritesStorage";
+import { Audio } from "expo-av";
+import { useAudio } from "../../context/AudioContext";
 
 // Create a mapping for images
 const images = {
@@ -33,12 +35,28 @@ const images = {
   "image11.png": require("../../assets/story-images/image11.png"),
 };
 
+const audioFiles = {
+  "audio1.mp3": require("../../assets/audio/audio1.mp3"),
+  "audio2.mp3": require("../../assets/audio/audio2.mp3"),
+  "audio3.mp3": require("../../assets/audio/audio3.mp3"),
+  "audio4.mp3": require("../../assets/audio/audio4.mp3"),
+  "audio5.mp3": require("../../assets/audio/audio5.mp3"),
+  "audio6.mp3": require("../../assets/audio/audio6.mp3"),
+  "audio7.mp3": require("../../assets/audio/audio7.mp3"),
+  "audio8.mp3": require("../../assets/audio/audio8.mp3"),
+  "audio9.mp3": require("../../assets/audio/audio9.mp3"),
+  "audio10.mp3": require("../../assets/audio/audio10.mp3"),
+  "audio11.mp3": require("../../assets/audio/audio11.mp3"),
+};
+
 const StoryDetail = () => {
   const { id } = useLocalSearchParams(); // Get the ID from the URL
+  const router = useRouter();
+  const { playSound, pauseSound, stopSound, isPlaying } = useAudio();
   const navigation = useNavigation(); // Get the navigation object
   const [favorite, setFavorite] = useState(false);
 
-  const [isPlaying, setIsPlaying] = useState();
+  const [sound, setSound] = useState();
 
   const story = storiesData.find((story) => story.id === id); // Find the story by ID
   const imageSource = images[story.image]; // Access the image using the mapping
@@ -48,8 +66,85 @@ const StoryDetail = () => {
       const result = await isFavorite(story.id);
       setFavorite(result);
     };
+    loadAudio();
     checkFavoriteStatus();
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+    };
   }, [story.id]);
+
+  useEffect(() => {
+    // Stop any playing audio when component unmounts or id changes
+    return () => {
+      stopSound();
+    };
+  }, [id]);
+
+  const loadAudio = async () => {
+    try {
+      const { sound } = await Audio.Sound.createAsync(audioFiles[story.audio]);
+
+      setSound(sound);
+    } catch (error) {
+      console.error("Error loading audio:", error);
+    }
+  };
+  const handlePlayPause = async () => {
+    if (isPlaying) {
+      await pauseSound();
+    } else {
+      await playSound(audioFiles[story.audio]);
+    }
+  };
+
+  const stopAndUnloadAudio = async () => {
+    if (sound) {
+      try {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+      } catch (error) {
+        console.error("Error stopping audio:", error);
+      }
+    }
+    setSound(null);
+    setIsPlaying(false);
+  };
+
+  const handleNext = async () => {
+    await stopSound();
+    const currentId = parseInt(id);
+    let nextId = currentId + 1;
+
+    // Assuming you have 11 stories, adjust this number if needed
+    const totalStories = 11;
+
+    // If we've reached the end, cycle back to the first story
+    if (nextId > totalStories) {
+      nextId = 1;
+    }
+
+    // Navigate to the next story (or back to the first)
+    router.push(`/stories/${nextId}`);
+  };
+
+  const handlePrevious = async () => {
+    await stopSound();
+    const currentId = parseInt(id);
+    let prevId = currentId - 1;
+
+    // Assuming you have 11 stories, adjust this number if needed
+    const totalStories = 11;
+
+    // If we've reached the beginning, cycle to the last story
+    if (prevId < 1) {
+      prevId = totalStories;
+    }
+
+    // Navigate to the previous story (or to the last if we're at the first)
+    router.push(`/stories/${prevId}`);
+  };
 
   const toggleFavorite = async () => {
     if (favorite) {
@@ -68,7 +163,9 @@ const StoryDetail = () => {
         headerLeft: () => (
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              navigation.goBack();
+            }}
             className="bg-white"
           >
             <Ionicons
@@ -113,15 +210,13 @@ const StoryDetail = () => {
         />
         <View style={styles.audioContainer} className="bg-secondary-100">
           {/* Previous Button */}
-          <TouchableOpacity
-          // onPress={handlePrevious}
-          >
+          <TouchableOpacity onPress={handleNext}>
             <Ionicons name="play-forward" size={28} color="#FFFFFF" />
           </TouchableOpacity>
 
           {/* Play/Pause Button */}
           <TouchableOpacity
-            // onPress={handlePlayPause}
+            onPress={handlePlayPause}
             style={{ marginHorizontal: 16 }}
           >
             <Ionicons
@@ -132,35 +227,22 @@ const StoryDetail = () => {
           </TouchableOpacity>
 
           {/* Next Button */}
-          <TouchableOpacity
-          // onPress={handleNext}
-          >
+          <TouchableOpacity onPress={handlePrevious}>
             <Ionicons name="play-back" size={28} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.titleContainer}>
-        {/* <TouchableOpacity
-          style={styles.favoriteButton}
-          onPress={() => toggleFavorite(story.id)}
-        >
-          <Ionicons
-            name={favorites.includes(story.id) ? "heart" : "heart-outline"}
-            size={28}
-            color="#FF8E01"
-          />
-        </TouchableOpacity> */}
+      <View style={styles.titleContainer} className="pb-0">
         <View>
           {/* Author */}
           <Text style={styles.title}>{story.title}</Text>
-          <Text className="text-sm text-gray-500 mt-1 text-right">
+          <Text className="text-sm text-gray-500 mt-1 text-left">
             نویسنده: {story.author}
           </Text>
         </View>
       </View>
       <View className="px-4">
-        <Text style={{ marginVertical: 10 }}>{story.description}</Text>
-        <Text style={{ marginVertical: 10 }}>{story.content}</Text>
+        <Text style={{ fontSize: 16 }}>{story.description}</Text>
       </View>
     </ScrollView>
   );
