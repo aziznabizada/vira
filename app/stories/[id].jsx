@@ -133,6 +133,11 @@ const StoryDetail = () => {
     router.push(`/stories/${prevId}`);
   };
 
+  const handleBack = async () => {
+    await stopSound();
+    router.push("/");
+  };
+
   const toggleFavorite = async () => {
     if (favorite) {
       await removeFavorite(story.id);
@@ -150,10 +155,7 @@ const StoryDetail = () => {
         headerLeft: () => (
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() => {
-              router.push("/");
-              // navigation.goBack();
-            }}
+            onPress={handleBack}
             className="bg-white"
           >
             <Ionicons

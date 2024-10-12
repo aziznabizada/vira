@@ -7,7 +7,7 @@ export const AudioProvider = ({ children }) => {
   const [globalSound, setGlobalSound] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const playSound = async (audioSource) => {
+  const playSound = async (soundFile) => {
     // If there's already a sound playing, stop and unload it
     if (globalSound) {
       await globalSound.stopAsync();
@@ -15,7 +15,7 @@ export const AudioProvider = ({ children }) => {
     }
 
     // Load and play the new sound
-    const { sound } = await Audio.Sound.createAsync(audioSource);
+    const { sound } = await Audio.Sound.createAsync(soundFile);
     setGlobalSound(sound);
     setIsPlaying(true);
     await sound.playAsync();
@@ -43,11 +43,16 @@ export const AudioProvider = ({ children }) => {
         globalSound.unloadAsync();
       }
     };
-  }, []);
+  }, [globalSound]);
 
   return (
     <AudioContext.Provider
-      value={{ playSound, pauseSound, stopSound, isPlaying }}
+      value={{
+        playSound,
+        pauseSound,
+        stopSound,
+        isPlaying,
+      }}
     >
       {children}
     </AudioContext.Provider>
