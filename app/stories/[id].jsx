@@ -63,23 +63,6 @@ const StoryDetail = () => {
   const story = storiesData.find((story) => story.id === id); // Find the story by ID
   const imageSource = images[story.image]; // Access the image using the mapping
 
-  const playAudio = async () => {
-    await soundRef.current.playAsync();
-    setIsPlaying(true);
-  };
-
-  const pauseAudio = async () => {
-    await soundRef.current.pauseAsync();
-    setIsPlaying(false);
-  };
-  useEffect(() => {
-    loadAudio();
-
-    return () => {
-      soundRef.current.unloadAsync(); // Unload audio on unmount
-    };
-  }, []);
-
   useEffect(() => {
     const checkFavoriteStatus = async () => {
       const result = await isFavorite(story.id);
