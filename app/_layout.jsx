@@ -20,20 +20,29 @@ const RootLayout = () => {
   });
 
   useEffect(() => {
-    const setupRTL = () => {
-      if (!I18nManager.isRTL) {
-        I18nManager.forceRTL(true);
-        I18nManager.allowRTL(true);
+    const setupApp = async () => {
+      try {
+        // Configure RTL if not already applied
+        if (!I18nManager.isRTL) {
+          I18nManager.forceRTL(true);
+          I18nManager.allowRTL(true);
+          // Uncomment if an app restart is required for RTL changes
+          // Expo.Updates.reloadAsync();
+        }
 
-        // Hide splash screen after RTL is applied
-      }
+        // Wait for a custom delay (e.g., 10 seconds)
+        await new Promise((resolve) => setTimeout(resolve, 5000));
 
-      // Hide the splash screen after fonts are loaded
-      if (fontsLoaded) {
-        SplashScreen.hideAsync();
+        // Hide splash screen after fonts are loaded
+        if (fontsLoaded) {
+          await SplashScreen.hideAsync();
+        }
+      } catch (error) {
+        console.error("Error setting up the app:", error);
       }
     };
-    setupRTL();
+
+    setupApp();
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
