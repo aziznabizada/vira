@@ -55,13 +55,13 @@ const StoryCard = ({ story }) => {
       {/* Story Content */}
       <View className="p-4 flex-row justify-between items-center">
         <View>
-          <Text className="text-xl font-vsemibold text-gray-800">
+          <Text className="text-xl font-bkoodakbold text-gray-800">
             {story.title}
           </Text>
 
-          <Text className="text-sm text-gray-500 mt-1">
+          {/* <Text className="text-sm text-gray-500 mt-1">
             نویسنده: {story.author}
-          </Text>
+          </Text> */}
         </View>
         {/* <TouchableOpacity
           style={styles.favoriteButton}

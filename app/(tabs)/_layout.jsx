@@ -14,10 +14,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
         tintColor={color}
         className="w-6 h-6"
       />
-      <Text
-        className={`${focused ? "font-vsemibold" : "font-vregular"} text-xs`}
-        style={{ color: color }}
-      >
+      <Text className="font-bkoodakbold text-xs" style={{ color: color }}>
         {name}
       </Text>
     </View>
@@ -50,7 +47,7 @@ const TabLayout = () => {
                 icon={icons?.story}
                 color={color}
                 name="داستان"
-                className="font-vextrabold"
+                className="font-bkoodakbold"
                 focused={focused}
               />
             ),
@@ -65,7 +62,7 @@ const TabLayout = () => {
               <TabIcon
                 icon={icons?.favorite}
                 color={color}
-                className="font-vextrabold"
+                className="font-bkoodakbold"
                 name="مورد علاقه"
                 focused={focused}
               />
@@ -82,7 +79,7 @@ const TabLayout = () => {
               <TabIcon
                 icon={icons?.home}
                 color={color}
-                className="font-vextrabold"
+                className="font-bkoodakbold"
                 name="در باره ما"
                 focused={focused}
               />
