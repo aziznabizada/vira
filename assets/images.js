@@ -9,5 +9,4 @@ export const images = {
   "image8.png": require("../assets/story-images/image8.png"),
   "image9.png": require("../assets/story-images/image9.png"),
   "image10.png": require("../assets/story-images/image10.png"),
-  "image11.png": require("../assets/story-images/image11.png"),
 };

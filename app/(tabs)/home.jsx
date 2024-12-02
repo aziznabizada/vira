@@ -23,24 +23,30 @@ export default function AboutScreen() {
           resizeMode="cover"
         />
 
-        <Text style={styles.title}>درباره ما</Text>
-        <Text style={styles.description}>
+        <Text style={styles.title} className="font-bkoodakbold">
+          درباره ما
+        </Text>
+        <Text style={styles.description} className="font-koodak">
           در مکتب ویرا، ما به ارائه آموزش با کیفیت و ایجاد یک محیط حمایتی برای
           دانش‌آموزان متعهد هستیم. هدف ما پرورش خلاقیت، تفکر انتقادی و عشق به
           یادگیری در دانش‌آموزان است.
         </Text>
 
-        <Text style={styles.subtitle}>مراکز پخش</Text>
-        <Text style={styles.location}>
+        <Text style={styles.subtitle} className="font-bkoodakbold">
+          مراکز پخش
+        </Text>
+        <Text style={styles.location} className="font-koodak">
           کابل، جاده شهید مزاری، بعد از ایستگاه تانک تیل، کتابفروشی اقرأ
         </Text>
-        <Text style={styles.location}>
+        <Text style={styles.location} className="font-koodak">
           کابل، خیرخانه، چهارراهی قلعه نجارها، پلازای احمدیار، طبقه دوم، کتاب
           زریاب
         </Text>
 
-        <Text style={styles.subtitle}>آدرس مکتب ویرا</Text>
-        <Text style={styles.location}>
+        <Text style={styles.subtitle} className="font-bkoodakbold">
+          آدرس مکتب ویرا
+        </Text>
+        <Text style={styles.location} className="font-koodak">
           کابل، جاده شهید مزاری، سرک معرفت، گلستان هشتم، مکتب ویرا
         </Text>
 
@@ -76,7 +82,7 @@ export default function AboutScreen() {
           </View>
         </View>
 
-        <Text style={styles.footer}>
+        <Text style={styles.footer} className="font-koodak">
           حق هر گونه انتشار برای مکتب ویرا محفوظ است.
         </Text>
       </ScrollView>

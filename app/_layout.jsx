@@ -8,15 +8,10 @@ SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
-    "Vazirmatn-Black": require("../assets/fonts/Vazirmatn-Black.ttf"),
-    "Vazirmatn-Bold": require("../assets/fonts/Vazirmatn-Bold.ttf"),
-    "Vazirmatn-ExtraBold": require("../assets/fonts/Vazirmatn-ExtraBold.ttf"),
-    "Vazirmatn-ExtraLight": require("../assets/fonts/Vazirmatn-ExtraLight.ttf"),
-    "Vazirmatn-Light": require("../assets/fonts/Vazirmatn-Light.ttf"),
-    "Vazirmatn-Medium": require("../assets/fonts/Vazirmatn-Medium.ttf"),
-    "Vazirmatn-Regular": require("../assets/fonts/Vazirmatn-Regular.ttf"),
-    "Vazirmatn-SemiBold": require("../assets/fonts/Vazirmatn-SemiBold.ttf"),
-    "Vazirmatn-Thin": require("../assets/fonts/Vazirmatn-Thin.ttf"),
+    "BKoodak-Bold": require("../assets/fonts/BKoodak-Bold.ttf"),
+    "BKoodak-Outline": require("../assets/fonts/BKoodak-Outline.ttf"),
+    koodak: require("../assets/fonts/koodak.ttf"),
+    dastan: require("../assets/fonts/dastan.ttf"),
   });
 
   useEffect(() => {

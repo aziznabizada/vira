@@ -22,7 +22,9 @@ const FavoriteCard = ({ item }) => {
         <TouchableOpacity>
           <Image source={imageSource} style={styles.image} />
           <View style={styles.textContainer}>
-            <Text style={styles.title}>{item.title}</Text>
+            <Text className="font-bkoodakbold" style={styles.title}>
+              {item.title}
+            </Text>
           </View>
         </TouchableOpacity>
       </Link>

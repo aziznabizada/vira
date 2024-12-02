@@ -15,7 +15,7 @@ const StoryList = () => {
   }, []);
 
   return (
-    <SafeAreaView className="font-vregular">
+    <SafeAreaView className="font-bkoodakbold">
       <ScrollView className="px-2 py-0">
         {stories.map((story, key) => {
           return <StoryCard story={story} key={key} />;

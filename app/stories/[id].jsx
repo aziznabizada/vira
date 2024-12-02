@@ -32,7 +32,6 @@ const images = {
   "image8.png": require("../../assets/story-images/image8.png"),
   "image9.png": require("../../assets/story-images/image9.png"),
   "image10.png": require("../../assets/story-images/image10.png"),
-  "image11.png": require("../../assets/story-images/image11.png"),
 };
 
 const audioFiles = {
@@ -46,7 +45,6 @@ const audioFiles = {
   "audio8.mp3": require("../../assets/audio/audio8.mp3"),
   "audio9.mp3": require("../../assets/audio/audio9.mp3"),
   "audio10.mp3": require("../../assets/audio/audio10.mp3"),
-  "audio11.mp3": require("../../assets/audio/audio11.mp3"),
 };
 
 const StoryDetail = () => {
@@ -162,7 +160,7 @@ const StoryDetail = () => {
               name="arrow-back"
               size={18}
               color="black"
-              className="font-vregular"
+              className="font-bkoodakbold"
             />
           </TouchableOpacity>
         ),
@@ -225,13 +223,18 @@ const StoryDetail = () => {
         <View>
           {/* Author */}
           <Text style={styles.title}>{story.title}</Text>
-          <Text className="text-sm text-gray-500 mt-1 text-left">
+          {/* <Text className="text-sm text-gray-500 mt-1 text-left">
             نویسنده: {story.author}
-          </Text>
+          </Text> */}
         </View>
       </View>
       <View className="px-4">
-        <Text style={{ fontSize: 16 }}>{story.description}</Text>
+        <Text
+          className="font-koodak"
+          style={{ fontSize: 16, fontWeight: "100", lineHeight: 28 }}
+        >
+          {story.description}
+        </Text>
       </View>
     </ScrollView>
   );
