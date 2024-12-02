@@ -1,6 +1,6 @@
 // app/[id].jsx
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import {
   View,
   Text,
@@ -19,6 +19,7 @@ import {
 } from "./../../utils/favoritesStorage";
 import { Audio } from "expo-av";
 import { useAudio } from "../../context/AudioContext";
+import { StatusBar } from "expo-status-bar";
 
 // Create a mapping for images
 const images = {
@@ -191,6 +192,7 @@ const StoryDetail = () => {
 
   return (
     <ScrollView>
+      <StatusBar translucent backgroundColor="transparent" style="light" />
       <View style={styles.imageContainer}>
         <Image
           source={imageSource} // Use require if images are local

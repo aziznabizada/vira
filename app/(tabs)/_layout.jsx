@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Stack, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
 
 import { icons } from "../../constants";
@@ -24,6 +24,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
 const TabLayout = () => {
   return (
     <>
+      <StatusBar backgroundColor="#161622" style="light" />
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#FFA001",
@@ -88,9 +89,6 @@ const TabLayout = () => {
           components={Favorites}
         />
       </Tabs>
-
-      {/* <Loader isLoading={loading} /> */}
-      {/* <StatusBar backgroundColor="#161622" style="light" /> */}
     </>
   );
 };
