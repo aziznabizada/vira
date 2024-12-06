@@ -53,6 +53,9 @@ const FavoritesPage = () => {
         numColumns={2}
         renderItem={({ item }) => <FavoriteCard item={item} />}
         contentContainerStyle={styles.container}
+        ListEmptyComponent={
+          <Text style={styles.emptyMessage}>لیست مورد علاقه خالی است</Text>
+        }
       />
     </SafeAreaView>
   );
@@ -90,6 +93,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  emptyMessage: {
+    fontSize: 14,
+    color: "gray",
+    textAlign: "center",
   },
 });
 
