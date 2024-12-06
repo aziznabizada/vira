@@ -1,6 +1,6 @@
 // app/[id].jsx
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
+  useColorScheme,
 } from "react-native";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import storiesData from "../../assets/data/strories.json"; // Adjust the path to your JSON file
@@ -16,9 +17,11 @@ import {
   addFavorite,
   removeFavorite,
   isFavorite,
+  toggleAppMod,
 } from "./../../utils/favoritesStorage";
 import { Audio } from "expo-av";
 import { useAudio } from "../../context/AudioContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 // Create a mapping for images
 const images = {
@@ -53,6 +56,7 @@ const StoryDetail = () => {
   const { playSound, pauseSound, stopSound, isPlaying } = useAudio();
   const navigation = useNavigation(); // Get the navigation object
   const [favorite, setFavorite] = useState(false);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const [sound, setSound] = useState();
 
@@ -165,21 +169,40 @@ const StoryDetail = () => {
           </TouchableOpacity>
         ),
         headerRight: () => (
-          <TouchableOpacity
-            style={styles.favoriteButton}
-            onPress={toggleFavorite}
-            className="bg-white"
-          >
-            <Ionicons
-              name={favorite ? "heart" : "heart-outline"}
-              size={24}
-              color="#FF9C01"
-            />
-          </TouchableOpacity>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {/* Favorite Button */}
+            <TouchableOpacity
+              style={styles.favoriteButton}
+              onPress={toggleFavorite}
+              className="bg-white"
+            >
+              <Ionicons
+                name={favorite ? "heart" : "heart-outline"}
+                size={24}
+                color="#FF9C01"
+              />
+            </TouchableOpacity>
+            <View style={{ width: 6 }} />
+            {/* Theme Icon */}
+            <TouchableOpacity
+              onPress={toggleTheme}
+              style={styles.favoriteButton}
+              className="bg-white"
+            >
+              <Image
+                source={
+                  theme === "light"
+                    ? require("../../assets/icon-light.png") // Light mode icon
+                    : require("../../assets/icon-dark.png") // Dark mode icon
+                }
+                style={{ width: 24, height: 24 }}
+              />
+            </TouchableOpacity>
+          </View>
         ),
       });
     }
-  }, [navigation, story, favorite]);
+  }, [navigation, story, favorite, theme]); // Added theme to dependencies
 
   if (!story) {
     return (

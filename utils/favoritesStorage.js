@@ -43,3 +43,23 @@ export const isFavorite = async (storyId) => {
     return false;
   }
 };
+
+// Get favorites from AsyncStorage
+export const getAppMod = async () => {
+  try {
+    const storedAppMode = await AsyncStorage.getItem("appMod");
+    return storedAppMode ? JSON.parse(storedAppMode) : [];
+  } catch (error) {
+    console.error("Error loading App Mod", error);
+    return [];
+  }
+};
+
+// chane the app mod of application
+export const toggleAppMod = async (theme) => {
+  try {
+    await AsyncStorage.setItem("appMod", theme == "light" ? "dark" : "light");
+  } catch (error) {
+    console.error("Error removing appMod", error);
+  }
+};
