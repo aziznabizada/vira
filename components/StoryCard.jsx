@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { images } from "../assets/images";
@@ -7,12 +7,15 @@ import {
   removeFavorite,
   isFavorite,
 } from "./../utils/favoritesStorage";
+import { ThemeContext } from "../context/ThemeContext";
+
 // import { Ionicons } from "@expo/vector-icons";
 
 // Create a mapping for images
 
 const StoryCard = ({ story }) => {
   const [favorite, setFavorite] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
   const imageSource = images[story.image]; // Access the image using the mapping
   const router = useRouter();
@@ -42,6 +45,7 @@ const StoryCard = ({ story }) => {
     <TouchableOpacity
       onPress={handlePress}
       className="bg-white  rounded-xl overflow-hidden shadow-lg m-4"
+      style={theme === "light" ? styles.light : styles.dark}
     >
       {/* Conditional Rendering for Image */}
       {imageSource && (
@@ -55,7 +59,10 @@ const StoryCard = ({ story }) => {
       {/* Story Content */}
       <View className="p-4 flex-row justify-between items-center">
         <View>
-          <Text className="text-xl font-bkoodakbold text-gray-800">
+          <Text
+            className="text-xl font-bkoodakbold text-gray-800"
+            style={theme === "light" ? styles.light : styles.dark}
+          >
             {story.title}
           </Text>
 
@@ -100,5 +107,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 2,
+  },
+  light: {
+    backgroundColor: "#FFFFFF",
+    color: "#333333",
+  },
+  dark: {
+    backgroundColor: "#2D2D2D",
+    color: "#FFFFFF",
   },
 });

@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { Stack, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
+import React from "react";
 import { Image, Text, View } from "react-native";
 
 import { icons } from "../../constants";

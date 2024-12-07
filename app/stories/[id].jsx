@@ -213,7 +213,7 @@ const StoryDetail = () => {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={theme === "light" ? styles.light : styles.dark}>
       <View style={styles.imageContainer}>
         <Image
           source={imageSource} // Use require if images are local
@@ -245,7 +245,14 @@ const StoryDetail = () => {
       <View style={styles.titleContainer} className="pb-0">
         <View>
           {/* Author */}
-          <Text style={styles.title}>{story.title}</Text>
+          <Text
+            style={[
+              styles.title,
+              theme === "light" ? styles.light : styles.dark,
+            ]}
+          >
+            {story.title}
+          </Text>
           {/* <Text className="text-sm text-gray-500 mt-1 text-left">
             نویسنده: {story.author}
           </Text> */}
@@ -254,7 +261,10 @@ const StoryDetail = () => {
       <View className="px-4">
         <Text
           className="font-koodak"
-          style={{ fontSize: 16, fontWeight: "100", lineHeight: 28 }}
+          style={[
+            { fontSize: 16, fontWeight: "100", lineHeight: 28 },
+            theme === "light" ? styles.light : styles.dark,
+          ]}
         >
           {story.description}
         </Text>
@@ -309,6 +319,14 @@ const styles = StyleSheet.create({
   },
   storyContent: {
     marginTop: "20px",
+  },
+  light: {
+    backgroundColor: "#FFFFFF",
+    color: "#1C1C1C",
+  },
+  dark: {
+    backgroundColor: "#2D2D2D",
+    color: "#FFFFFF",
   },
 });
 
