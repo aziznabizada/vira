@@ -1,4 +1,3 @@
-// themeContext.js
 import React, { createContext, useState } from "react";
 import { Appearance } from "react-native";
 

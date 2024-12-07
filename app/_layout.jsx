@@ -3,7 +3,7 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { I18nManager } from "react-native";
 import { AudioProvider } from "../context/AudioContext";
-import { ThemeContext } from "../context/ThemeContext";
+import { ThemeProvider } from "../context/ThemeContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -14,7 +14,6 @@ const RootLayout = () => {
     koodak: require("../assets/fonts/koodak.ttf"),
     dastan: require("../assets/fonts/dastan.ttf"),
   });
-  const { theme, toggleTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     const setupRTL = () => {

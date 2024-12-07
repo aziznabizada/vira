@@ -8,7 +8,6 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
-  useColorScheme,
 } from "react-native";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import storiesData from "../../assets/data/strories.json"; // Adjust the path to your JSON file
@@ -17,7 +16,6 @@ import {
   addFavorite,
   removeFavorite,
   isFavorite,
-  toggleAppMod,
 } from "./../../utils/favoritesStorage";
 import { Audio } from "expo-av";
 import { useAudio } from "../../context/AudioContext";
@@ -170,19 +168,6 @@ const StoryDetail = () => {
         ),
         headerRight: () => (
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {/* Favorite Button */}
-            <TouchableOpacity
-              style={styles.favoriteButton}
-              onPress={toggleFavorite}
-              className="bg-white"
-            >
-              <Ionicons
-                name={favorite ? "heart" : "heart-outline"}
-                size={24}
-                color="#FF9C01"
-              />
-            </TouchableOpacity>
-            <View style={{ width: 6 }} />
             {/* Theme Icon */}
             <TouchableOpacity
               onPress={toggleTheme}
@@ -196,6 +181,21 @@ const StoryDetail = () => {
                     : require("../../assets/icon-dark.png") // Dark mode icon
                 }
                 style={{ width: 24, height: 24 }}
+              />
+            </TouchableOpacity>
+
+            <View style={{ width: 6 }} />
+
+            {/* Favorite Button */}
+            <TouchableOpacity
+              style={styles.favoriteButton}
+              onPress={toggleFavorite}
+              className="bg-white"
+            >
+              <Ionicons
+                name={favorite ? "heart" : "heart-outline"}
+                size={24}
+                color="#FF9C01"
               />
             </TouchableOpacity>
           </View>
