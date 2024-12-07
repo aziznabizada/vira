@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Vira",
-    "slug": "vira",
+    "name": "bozak_chini",
+    "slug": "bozak-chini",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
@@ -39,7 +39,7 @@
       "supportsRTL": true,
       "forcesRTL": true,
       "eas": {
-        "projectId": "b16b57dc-853e-4711-a6df-695f74a40dc1"
+        "projectId": "9f1f9d9d-4660-4776-96c8-7e319d665999"
       }
     }
   }
