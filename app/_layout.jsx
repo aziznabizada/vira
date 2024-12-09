@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
-import { I18nManager } from "react-native";
+import { I18nManager, NativeModules } from "react-native";
 import { AudioProvider } from "../context/AudioContext";
 import { ThemeProvider } from "../context/ThemeContext";
 
@@ -20,6 +20,9 @@ const RootLayout = () => {
       if (!I18nManager.isRTL) {
         I18nManager.forceRTL(true);
         I18nManager.allowRTL(true);
+
+        // Reload the app after setting RTL
+        NativeModules.DevSettings.reload();
       }
 
       // Hide the splash screen after fonts are loaded
