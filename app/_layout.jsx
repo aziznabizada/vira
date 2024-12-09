@@ -20,13 +20,14 @@ const RootLayout = () => {
       if (!I18nManager.isRTL) {
         I18nManager.forceRTL(true);
         I18nManager.allowRTL(true);
-
-        // Hide splash screen after RTL is applied
       }
 
       // Hide the splash screen after fonts are loaded
       if (fontsLoaded) {
-        SplashScreen.hideAsync();
+        // Add 4-second delay before hiding the splash screen
+        setTimeout(() => {
+          SplashScreen.hideAsync();
+        }, 4000);
       }
     };
     setupRTL();

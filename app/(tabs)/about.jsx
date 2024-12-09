@@ -5,12 +5,12 @@ import {
   StyleSheet,
   Linking,
   ScrollView,
-  Image,
+  // Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome icons
 
-import { images } from "../../constants";
+// import { images } from "../../constants";
 
 export default function AboutScreen() {
   return (
@@ -32,12 +32,14 @@ export default function AboutScreen() {
             نویسندگی کرده اند. گروه آموزشی بزک چینی به شما اپلیکیشن بزک چینی را
             معرفی می‌کند حاصل خلاقیت و تخیل کودکان را در معرض دید و شنود شما
             قرار می دهد. این اپلیکیشن مخصوص داستان‌سرایی کودکان طراحی شده است.
-            در تیم بزک چینی، دو مربی ارجمند رحیمه عطایی و جهان یعقوبی از دل و
-            جان مایه گذاشته اند و تخیل آنها را به سوی نوشتن، سوق داده اند. آنها
-            در یک فرایند پر خم و پیچ برای این کودکان، این امکان را فراهم کرده
-            اند تا داستان‌های خود را بنویسند و پادکست آن را تولید کنند. پشت سر
-            هر داستان این اپلیکیشن، تخیل و شادی کودکانه است که تبدیل به یک
-            داستان مینیمال شده است.
+            در تیم بزک چینی، دو مربی ارجمند{" "}
+            <Text className="font-bold">رحیمه عطایی</Text> و{" "}
+            <Text className="font-bold">جهان یعقوبی</Text> از دل و جان مایه
+            گذاشته اند و تخیل آنها را به سوی نوشتن، سوق داده اند. آنها در یک
+            فرایند پر خم و پیچ برای این کودکان، این امکان را فراهم کرده اند تا
+            داستان‌های خود را بنویسند و پادکست آن را تولید کنند. پشت سر هر
+            داستان این اپلیکیشن، تخیل و شادی کودکانه است که تبدیل به یک داستان
+            مینیمال شده است.
           </Text>
           <Text>
             علاوه بر آن آنها تمرین کرده اند تا این داستان ها را با صدای شیرین و
@@ -52,7 +54,7 @@ export default function AboutScreen() {
             خود کرده، با حمایت از خود آن کودک و مربیانشان، به رشد و شکوفایی آنها
             کمک کنید. این حمایت می‌تواند با یک لایک ساده، یک تماس محبت‌آمیز یا
             حتی یک هدیه کوچک به نمایش گذاشته شود. بیایید با هم دنیای خلاقیت و
-            خیال‌پردازی را برای این هنرمندان کوچک زیباتر کنیم
+            .خیال‌پردازی را برای این هنرمندان کوچک زیباتر کنیم
           </Text>
         </Text>
 
@@ -67,28 +69,29 @@ export default function AboutScreen() {
         <View style={styles.contactIcons}>
           <View style={styles.iconContainer}>
             <FontAwesome
-              name="phone"
+              name="envelope"
               size={24}
               color="#FF9001"
-              onPress={() => Linking.openURL("tel:0799448050")}
+              onPress={() => Linking.openURL("mailto:info@vira-edu.com")}
             />
             <Text
               style={styles.iconText}
-              onPress={() => Linking.openURL("tel:0799448050")}
+              onPress={() => Linking.openURL("mailto:info@vira-edu.com")}
             >
-              0799448050
+              info@vira-edu.com
             </Text>
           </View>
+
           <View style={styles.iconContainer}>
             <FontAwesome
               name="globe"
               size={24}
               color="#FF9001"
-              onPress={() => Linking.openURL("http://www.vira.af")}
+              onPress={() => Linking.openURL("https://vira-edu.com")}
             />
             <Text
               style={styles.iconText}
-              onPress={() => Linking.openURL("http://www.vira.af")}
+              onPress={() => Linking.openURL("https://vira-edu.com")}
             >
               www.vira.af
             </Text>

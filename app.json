@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "bozak_chini",
+    "name": "بزک چینی",
     "slug": "bozak-chini",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,6 +20,7 @@
       "supportsTablet": true
     },
     "android": {
+      "include": ["expo-camera", "expo-sensors"],
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
