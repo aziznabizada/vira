@@ -104,8 +104,8 @@ const StoryDetail = () => {
     const currentId = parseInt(id);
     let nextId = currentId + 1;
 
-    // Assuming you have 11 stories, adjust this number if needed
-    const totalStories = 11;
+    // Assuming you have 10 stories, adjust this number if needed
+    const totalStories = 10;
 
     // If we've reached the end, cycle back to the first story
     if (nextId > totalStories) {
@@ -121,8 +121,8 @@ const StoryDetail = () => {
     const currentId = parseInt(id);
     let prevId = currentId - 1;
 
-    // Assuming you have 11 stories, adjust this number if needed
-    const totalStories = 11;
+    // Assuming you have 10 stories, adjust this number if needed
+    const totalStories = 10;
 
     // If we've reached the beginning, cycle to the last story
     if (prevId < 1) {

@@ -27,10 +27,10 @@ const RootLayout = () => {
 
       // Hide the splash screen after fonts are loaded
       if (fontsLoaded) {
-        // Add 4-second delay before hiding the splash screen
+        // Add 3-second delay before hiding the splash screen
         setTimeout(() => {
           SplashScreen.hideAsync();
-        }, 4000);
+        }, 3000);
       }
     };
     setupRTL();
